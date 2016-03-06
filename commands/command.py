@@ -38,7 +38,7 @@ class Command(BaseCommand):
 
     # optional
     # auto_help = False      # uncomment to deactive auto-help for this command.
-    # arg_regex = r"\s.*?|$" # optional regex detailing how the part after
+    arg_regex = r"\s.*?|$" # optional regex detailing how the part after
                              # the cmdname must look to match this command.
 
     # (we don't implement hook method access() here, you don't need to
@@ -136,3 +136,44 @@ class MuxCommand(default_cmds.MuxCommand):
         # this can be removed in your child class, it's just
         # printing the ingoing variables as a demo.
         super(MuxCommand, self).func()
+
+###################################################################################
+
+      # Solace commands, will be moved to their respective files later
+
+###################################################################################
+
+
+class CmdScore(Command):
+    """
+    Presents your score card.
+
+    Usage:
+      score
+
+    """
+    key = "score"
+    aliases = ["score","sc","sco"]
+    lock = "cmd:all()"
+    help_category = "General"
+
+    def func(self):
+        "need some serious redoing..."
+        attributes = self.caller.db.attributes
+        vitals = self.caller.db.vitals
+        string = """ ====================[ SCORE ]====================
+
+     Health: %s    Stamina: %s    Fatigue: %s
+
+         Strength:  %s        Endurance:  %s
+         Agility:   %s        Dexterity:  %s
+
+ =================================================""" % \
+            (vitals['health'],
+             vitals['stamina'],
+             vitals['fatigue'],
+             attributes['str'],
+             attributes['end'],
+             attributes['agi'],
+             attributes['dex'],)
+        self.caller.msg(string)

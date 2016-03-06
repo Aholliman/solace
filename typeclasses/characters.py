@@ -29,4 +29,15 @@ class Character(DefaultCharacter):
     at_post_puppet - Echoes "PlayerName has entered the game" to the room.
 
     """
-    pass
+    def at_object_creation(self):
+        """
+        Called at creation. Eventually, this will be done by some sort of 
+        character generation process.
+        """
+        self.db.attributes = {'str': 5,
+                              'agi': 5,
+                              'dex': 5,
+                              'end': 5,}
+        self.db.vitals = {'health': 100, 
+                          'stamina': 50,
+                          'fatigue': 0,}
