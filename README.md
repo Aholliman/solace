@@ -34,3 +34,4 @@ documentation found here: https://github.com/evennia/evennia/wiki.
 
 Plenty of beginner's tutorials can be found here:
 http://github.com/evennia/evennia/wiki/Tutorials.
+# solace
